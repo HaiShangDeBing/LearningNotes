@@ -51,3 +51,24 @@ git remote add origin git@github.com:GitAccountName/test.git
 ```bash
 git push -u origin master
 ```
+
+## 其它命令
+
+检查状态
+
+```
+git status
+```
+
+尚未缓存的改动
+
+```
+git diff
+```
+
+自动将在提交前将已记录、修改的文件放入缓存区
+
+```
+git commit -a "change"
+```
+
