@@ -28,7 +28,7 @@ git commit -m "write a readme file"
 
 ## 远程仓库
 
-### 创建 SSH Key
+#### 创建 SSH Key
 
 ```bash
 ssh-keygen -t rsa -C "youremail@example.com"
@@ -52,6 +52,28 @@ git remote add origin git@github.com:GitAccountName/test.git
 git push -u origin master
 ```
 
+#### 克隆远程库
+
+使用下面的命令可以克隆远程库，并会在当前目录下创建 test 文件夹：
+
+```bash
+git clone git@github.com:GitAccountName/test.git
+```
+
+## 分支管理
+
+查看分支：`git branch`
+
+创建分支：`git branch <name>`
+
+切换分支：`git checkout <name>`
+
+创建+切换分支：`git checkout -b <name>`
+
+合并某分支到当前分支：`git merge <name>`
+
+删除分支：`git branch -d <name>`
+
 ## 其它命令
 
 检查状态
@@ -69,6 +91,7 @@ git diff
 自动将在提交前将已记录、修改的文件放入缓存区
 
 ```
-git commit -a "change"
+git commit -a
 ```
 
+然后会出现 vim 界面，按 i 插入，输入本次提交的说明；按 Esc 返回命令模式，输入 :wq 保存退出。

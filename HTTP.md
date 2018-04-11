@@ -291,6 +291,6 @@ WebSocket 协议的主要特点：
 
 ## 参考文献
 
-1. [图解 HTTP](https://book.douban.com/subject/25863515/ "图解 HTTP")
+1. 上野宣.[图解 HTTP](https://book.douban.com/subject/25863515/ "图解 HTTP"), 人民邮电出版社, 2014.
 
    ​
