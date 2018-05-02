@@ -105,6 +105,10 @@ Content-Type: text/html
 
 Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。根据从服务端发送的响应报文内的一个叫做 Set-Cookie 的首部字段信息，通知客户端保存 Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入 Cookie 值发送出去。
 
+### Session 和 Cookie 区别
+
+Session 是服务器用来跟踪用户的一种手段，每个 Session 都有一个唯一标识：Session ID。当服务器创建了一个 Session 时，给客户端发送的响应报文包含了 Set-Cookie 字段，其中有一个名为 sid 的键值对，这个键值对就是 Session ID。客户端收到后就把 Cookie 保存在浏览器中，并且之后发送的请求报文都包含 Session ID。HTTP 就是通过 Session 和 Cookie 这两种方式一起合作来实现跟踪用户状态的，Session 用于服务器端，Cookie 用于客户端。
+
 ### 获取部分内容的范围请求
 
 如果下载过程中遇到网络中断的情况，那就必须重头开始。为了解决上诉问题，需要一种可恢复的机制。要实现该功能需要指定下载的实体范围。执行范围请求时，会用到首部字段 Range 来指定资源的 byte 范围。
