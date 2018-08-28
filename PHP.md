@@ -210,11 +210,44 @@ echo GREETING;
 
 ## PHP 字符串运算符
 
-![1](E:\Picture\php\1.png)
+![1](image/php/1.png)
 
 ## PHP 数组运算符
 
-![2](E:\Picture\php\2.png)
+![2](image/php/2.png)
+
+## PHP 其他操作符
+
+- 错误抑制操作符@
+
+  可以在任何表达式前面使用，例如 \$a=@(57/0)，这个警告会被抑制住。如果在 php.ini 文件中启用了 PHP 的track_errors特性，错误信息将会被保存在全局变量 \$php_errormsg 中。
+
+- 执行操作符``
+
+  它是一对反向单引号，PHP 会试着将反向单引号之间的命令当作服务器端命令行命令来执行。`$out='ls -la';echo $out;`
+
+## 变量处理函数
+
+- gettype()：返回变量的类型，如果不是标准类型之一，返回 unknown type
+- settype()：设置变量的类型
+- is_array()
+- is_resource()：是否是一个资源。
+- is_callabel()：是否是有效的函数名称
+- isset()：变量存在返回true
+- empty()：检查变量是否存在，以及它的值是否为非空和非0。
+- intval()
+- floatval()
+- strval()
+
+## 使用declare
+
+```php
+declare(directive){
+    //block
+}
+```
+
+这种结构用来设置代码块的执行指令，目前 PHP 提供了两个执行指令，ticks 和 encoding。插入指令 ticks=n 它允许在代码块内部没执行 n 行代码后运行特定函数。
 
 ## PHP foreach 循环
 
@@ -227,8 +260,38 @@ $colors = array("red","green","blue","yellow");
 foreach ($colors as $value) {
   echo "$value <br>";
 }
+
+$colors = array("red"=>10,"green"=>20,"blue"=>30,"yellow"=>40); 
+
+foreach ($colors as $key => $value) {
+  echo "$key.' '.$value <br>";
+}
 ?>
 ```
+
+## each
+
+```php+HTML
+<?php 
+$colors = array("red"=>10,"green"=>20,"blue"=>30,"yellow"=>40); 
+
+while ($color=each($colors)) {
+  echo "$element['key'].' '.$element['value'] <br>";
+}
+
+while(list($name,$num)=each($colors)){
+  echo "$name.' '.$num <br>"; 
+}
+?>
+```
+
+## array_walk()
+
+对数组每个元素应用函数
+
+## shuffle
+
+把数组中的元素按随机顺序重新排序
 
 ## PHP 函数
 
@@ -236,7 +299,7 @@ PHP 的真正力量来自它的函数：它拥有超过 1000 个内建的函数�
 
 ### 在 PHP 创建用户定义函数
 
-![3](E:\Picture\php\3.png)
+![3](image/php/3.png)
 
 ## PHP 数组
 
@@ -298,7 +361,58 @@ $cars = array
 - $_COOKIE
 - $_SESSION
 
-![4](E:\Picture\php\4.png)
+![4](image/php/4.png)
+
+## 字符串操作和正则表达式
+
+使用 Perl 风格的正则表达式语法，每个表达式必须包含在一对分隔符中。可以选择任何非字母、数字、“、”或空格的字符作为分隔符。有时，可能需要在结束分隔符后添加一个模式修饰符。
+
+|     .     |                       匹配任意一个字符                       |
+| :-------: | :----------------------------------------------------------: |
+|    []     |           字符集匹配，匹配方括号中定义的字符集之一           |
+|    [^]    |                 匹配没有在方括号中定义的字符                 |
+|     ^     |                         匹配开始位置                         |
+|     $     |                         匹配结束位置                         |
+|  \\(\\)   |                         定义子表达式                         |
+|    \n     |            子表达式向前引用，n 为 1-9 之间的数字             |
+|     *     |                 任意次匹配（零次或多次匹配）                 |
+| \\{m,n\\} | 至少 m 次，至多 n 次匹配；\\{m\\} 表示 m 次精确匹配；\\{m,\\} 表示至少 m 次匹配 |
+|     ?     |                最多一次匹配（零次或一次匹配）                |
+|     +     |               至少一次匹配（一次或更多次匹配）               |
+|    \|     |           或运算，其左右操作数均可以为一个子表达式           |
+
+## 匿名（闭包）函数实现
+
+使用 use 关键字显示定义这些变量，可以对全局作用域变量的访问。
+
+```php
+$printer=function($value){echo "$value <br/>";};
+
+$markup=0.2;
+$apply=function(&$val) use ($markup){
+    $val=$val*(1+$markup);
+}
+```
+
+## 使用 Trait
+
+Trait 是能够充分利用多重继承又不带来痛苦的方法。可以对将在多个类中复用的功能进行分组。
+
+```php
+trait logger{
+    public function logmessage($message,$level='DEBUG'){
+        
+    }
+}
+class fileStorage{
+    use logger;
+    function store($data){
+        $this->logmessage($msg);
+    }
+}
+```
+
+
 
 # PHP表单
 
@@ -356,7 +470,7 @@ GET 可用于发送非敏感的数据。
 
 ## PHP 表单验证
 
-![5](E:\Picture\php\5.png)
+![5](image/php/5.png)
 
 ## PHP 表单必填
 

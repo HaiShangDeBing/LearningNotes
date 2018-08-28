@@ -10,13 +10,11 @@
 
 1. 与css类似，直接嵌入到html页面中.
 
-   ![1](E:\Picture\javascript\1.png)
+   ![1](image\javascript\1.png)
 
-2. 文件调用：JavaScript代码写到另一个文件当中（其后缀通常为“.js”），然后用格式为“<script
+2. 文件调用：JavaScript代码写到另一个文件当中（其后缀通常为“.js”），然后用格式为的标记把它嵌入到文档中.
 
-src="javascript.js"></script>”的标记把它嵌入到文档中.
-
-![2](E:\Picture\javascript\2.png)
+![2](image\javascript\2.png)
 
 html页面中出现<script>标签后，就会让页面暂停等待脚本的解析和执行。无论当前脚本是内嵌式还是外链式，页面的下载和渲染都必须停下来等待脚本的执行完成才能继续，这在页面的生命周期中是必须的。
 
@@ -39,9 +37,9 @@ html页面中出现<script>标签后，就会让页面暂停等待脚本的解�
 - JavaScript严格区分大小写，computer和Computer是两个完全不同的变量
 - 禁止使用JavaScript的保留关键字作为变量名
 
-![3](E:\Picture\javascript\3.png)
+![3](image\javascript\3.png)
 
-![4](E:\Picture\javascript\4.png)
+![4](image\javascript\4.png)
 
 ### 4 JavaScript中数据类型
 
@@ -73,7 +71,7 @@ var c=a+2;//输出c等于3.142
 - 对于减号运算符，因为字符串不支持减法运算，所以系统自动将字符串转换成数值，对于包含其他字符的字符的字符串，将转换成NaN。
 - 对于加号运算符，因为字符串可用加号作为连接运算符，所以系统自动将数值转换成字符串。
 
-![5](E:\Picture\javascript\5.png)
+![5](image\javascript\5.png)
 
 JavaScript 提供了如下几个函数来执行强制类型转换：
 
@@ -106,9 +104,9 @@ JavaScript 的字符串必须用引号括起来，可以是单引号，也可以
 
 typeof用于判断某个变量的数据类型，instanceof用于判断某个变量是否为指定类的实例
 
-![17](E:\Picture\javascript\17.png)
+![17](E:\Documents\LearningNotes\image\javascript\17.png)
 
-![18](E:\Picture\javascript\18.png)
+![18](image\javascript\18.png)
 
 ### 5 语句
 
@@ -225,7 +223,7 @@ with(document)
 
 可以避免重复书写对象。
 
-![19](E:\Picture\javascript\19.png)
+![19](image\javascript\19.png)
 
 #### for in 循环
 
@@ -361,9 +359,9 @@ example(20,40);
 myfun.apply(window,[12,23]);
 ```
 
-![20](E:\Picture\javascript\20.png)
+![20](image\javascript\20.png)
 
-![21](E:\Picture\javascript\21.png)
+![21](image\javascript\21.png)
 
 ### 7 创建对象
 
@@ -406,11 +404,11 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 </html>
 ```
 
-![22](E:\Picture\javascript\22.png)
+![22](image\javascript\22.png)
 
-![23](E:\Picture\javascript\23.png)
+![23](image\javascript\23.png)
 
-![25](E:\Picture\javascript\25.png)
+![25](image\javascript\25.png)
 
 现在就更像创建一般对象了。所有的非函数属性都在构造函数中创建，意味着又能够用构造函数的参数赋予属性默认值了。因为只创建 showColor() 函数的一个实例，所以没有内存浪费。此外，给 oCar1 的 drivers 数组添加 "Bill" 值，不会影响到 oCar2 的数组，所以输出这些数组的值时，oCar1.drivers 显示的是 "Mike,John,Bill"，而 oCar2.drivers 显示的是 "Mike,John"。因为使用了原型方式，所以仍然能利用 instanceof 运算符来判断对象的类型。
 
@@ -418,29 +416,29 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 
 #### **动态原型方法**
 
-![26](E:\Picture\javascript\26.png)
+![26](image\javascript\26.png)
 
 直到检查 typeof Car._initialized 是否等于 "undefined" 之前，这个构造函数都未发生变化。这行代码是动态原型方法中最重要的部分。如果这个值未定义，构造函数将用原型方式继续定义对象的方法，然后把 Car._initialized 设置为 true。如果这个值定义了（它的值为 true 时，typeof 的值为 Boolean），那么就不再创建该方法。简而言之，该方法使用标志（_initialized）来判断是否已给原型赋予了任何方法。该方法只创建并赋值一次，传统的 OOP 开发者会高兴地发现，这段代码看起来更像其他语言中的类定义了。
 
 #### **重定义已有方法**
 
-![27](E:\Picture\javascript\27.png)
+![27](image\javascript\27.png)
 
 在这段代码中，第一行代码把对当前 toString() 方法的引用保存在属性 originalToString 中。然后用定制的方法覆盖了 toString() 方法。新方法将检查该函数源代码的长度是否大于 100。如果是，就返回错误信息，说明该函数代码太长，否则调用 originalToString() 方法，返回函数的源代码。
 
-![28](E:\Picture\javascript\28.png)
+![28](image\javascript\28.png)
 
 #### 对象冒充
 
-![29](E:\Picture\javascript\29.png)
+![29](image\javascript\29.png)
 
-![30](E:\Picture\javascript\30.png)
+![30](image\javascript\30.png)
 
-![31](E:\Picture\javascript\31.png)
+![31](image\javascript\31.png)
 
-![32](E:\Picture\javascript\32.png)
+![32](image\javascript\32.png)
 
-![33](E:\Picture\javascript\33.png)
+![33](image\javascript\33.png)
 
 ### 8 w3school 学习笔记
 
@@ -473,23 +471,23 @@ else
 </html>
 ```
 
-![6](E:\Picture\javascript\6.png)
+![6](image\javascript\6.png)
 
-![7](E:\Picture\javascript\7.png)
+![7](image\javascript\7.png)
 
-![8](E:\Picture\javascript\8.png)
+![8](image\javascript\8.png)
 
-![9](E:\Picture\javascript\9.png)
+![9](image\javascript\9.png)
 
-![10](E:\Picture\javascript\10.png)
+![10](image\javascript\10.png)
 
-![11](E:\Picture\javascript\11.png)
+![11](image\javascript\11.png)
 
-![12](E:\Picture\javascript\12.png)
+![12](image\javascript\12.png)
 
-![13](E:\Picture\javascript\13.png)
+![13](image\javascript\13.png)
 
-![14](E:\Picture\javascript\14.png)
+![14](image\javascript\14.png)
 
 ### 9 JavaScript HTML DOM
 
@@ -510,9 +508,9 @@ else
 - 通过标签名找到 HTML 元素
 - 通过类名找到 HTML 元素
 
-![15](E:\Picture\javascript\15.png)
+![15](image\javascript\15.png)
 
-![16](E:\Picture\javascript\16.png)
+![16](image\javascript\16.png)
 
 ## Reference
 

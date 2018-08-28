@@ -54,7 +54,7 @@ PHP 提供了 mysql_connect() 函数来连接数据库。
 
 该函数有5个参数，在成功链接到MySQL后返回连接标识，失败返回 FALSE 。
 
-![6](E:\Picture\php\6.png)
+![6](image/php/6.png)
 
 你可以使用PHP的 mysql_close() 函数来断开与MySQL数据库的链接。
 
@@ -142,15 +142,15 @@ PHP 提供了函数 mysql_select_db  来选取一个数据库。函数在执行�
 
 #### 数值类型
 
-![7](E:\Picture\php\7.png)
+![7](image/php/7.png)
 
 #### 日期和时间类型
 
-![8](E:\Picture\php\8.png)
+![8](image/php/8.png)
 
 #### 字符串类型
 
-![9](E:\Picture\php\9.png)
+![9](image/php/9.png)
 
 ### MySQL 创建或删除数据表
 
@@ -413,7 +413,7 @@ GROUP BY column_name;
 - **LEFT JOIN（左连接）：**获取左表所有记录，即使右表没有对应匹配的记录。
 - **RIGHT JOIN（右连接）：** 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。
 
-![10](E:\Picture\php\10.png)
+![10](image/php/10.png)
 
 ### MySQL NULL 值处理
 
@@ -580,5 +580,5 @@ MySQL 中提供了LOAD DATA INFILE语句来插入数据。 以下实例中将从
 
 mysqlimport客户端提供了LOAD DATA INFILEQL语句的一个命令行接口。mysqlimport的大多数选项直接对应LOAD DATA INFILE子句。
 
-![11](E:\Picture\php\11.png)
+![11](image/php/11.png)
 
