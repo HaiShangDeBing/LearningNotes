@@ -6,7 +6,7 @@
 
 ## JavaScript语法规范
 
-### 1 JavaScript 书写位置
+### JavaScript 书写位置
 
 1. 与css类似，直接嵌入到html页面中.
 
@@ -20,7 +20,7 @@
 
 html页面中出现 `<script>` 标签后，就会让页面暂停等待脚本的解析和执行。无论当前脚本是内嵌式还是外链式，页面的下载和渲染都必须停下来等待脚本的执行完成才能继续，这在页面的生命周期中是必须的。
 
-### 2 JavaScript 网页中输出信息写法
+###  JavaScript 网页中输出信息写法
 
 1. alert()，在网页中弹出提示框，显示信息。
 2. console.log()，在控制台输出消息，一般用来调试程序。
@@ -28,7 +28,7 @@ html页面中出现 `<script>` 标签后，就会让页面暂停等待脚本的�
 4. confirm()，在网页中弹出提示框，显示信息，该方法一般与if 判断语句结合使用。
 5. document.write()，直接在页面中输出信息。
 
-### 3 声明变量（定义变量）  var
+### 声明变量（定义变量）  var
 
 变量定义：   var   自定义名称;
 
@@ -43,7 +43,7 @@ html页面中出现 `<script>` 标签后，就会让页面暂停等待脚本的�
 
 ![4](image/javascript/4.png)
 
-### 4 JavaScript中数据类型
+### JavaScript中数据类型
 
 #### 简单数据类型：
 
@@ -53,6 +53,20 @@ html页面中出现 `<script>` 标签后，就会让页面暂停等待脚本的�
 - undefined:变量未初始化
 - null：空类型
 
+#### null，undefined 的区别？
+
+```
+null 		表示一个对象是“没有值”的值，也就是值为“空”；
+undefined 	表示一个变量声明了没有初始化(赋值)；
+
+undefined不是一个有效的JSON，而null是；
+undefined的类型(typeof)是undefined；
+null的类型(typeof)是object；
+
+Javascript将未赋值的变量默认值设为undefined；
+Javascript从来不会将变量设为null。它是用来让程序员表明某个用var声明的变量时没有值的。
+```
+
 #### 复杂数据类型：
 
 - Object:对象（引用）
@@ -61,6 +75,17 @@ html页面中出现 `<script>` 标签后，就会让页面暂停等待脚本的�
 **NaN**:  Not  a Number      表示不是一个数字，判断是不是一个数字使用：   isNaN(x)
 
 **Infinity**：无穷大          例如： var   number=7/0 ;
+
+#### 不可变的原始值和可变的对象引用
+
+JavaScript的原始值（undefined，null，布尔值、数字和字符串）是不可更改的。
+
+```
+var s="hello";
+s.toUpperCase();//返回HELLO，但并没有改变s的值
+```
+
+对象和原始值不同，它们的值是可修改的。
 
 #### 类型转换
 
@@ -110,7 +135,26 @@ typeof用于判断某个变量的数据类型，instanceof用于判断某个变�
 
 ![18](image/javascript/18.png)
 
-### 5 语句
+#### 声明提前（hoisting）
+
+JavaScript 的变量作用域以函数为边界。声明提前指函数里声明的所有变量（但不涉及赋值）被提前至函数体的顶部。
+
+应该尽可能将 var 类型的变量声明放在函数顶部，而不是靠近使用变量的地方。
+
+#### 作用域链
+
+### JavaScript严格模式
+
+使用“use strict”指令的目的是说明（脚本或函数中）后续的代码将会解析为严格代码。
+
+- 在严格模式中禁止使用with语句。
+- 所有的变量都要先声明。
+- 调用的函数（不是方法）中的一个this值是undefined。
+- 当通过call（）或apply（）来调用函数时，其中的this值就是通过call（）或apply（）传入的第一个参数。
+- 传入eval（）的代码不能在调用程序所在的上下文中声明变量或定义函数。
+- 当delete运算符后跟随非法的标识符时，将会抛出一个语法异常。
+
+### 语句
 
 #### 语句块
 
@@ -210,7 +254,10 @@ catch(err)
 
 #### with 语句
 
+用于临时扩展作用域链。
+
 ```javascript
+这条语句将object添加到作用域链的头部，然后执行statement，最后把作用域链恢复到原始状态。
 with(object)
 {
   statements
@@ -247,7 +294,7 @@ for (x in person)
 - 遍历数组里的所有数组元素
 - 遍历JavaScript对象的所有属性
 
-### 6 函数
+### 函数
 
 #### 定义命名函数
 
@@ -365,7 +412,153 @@ myfun.apply(window,[12,23]);
 
 ![21](image/javascript/21.png)
 
-### 7 创建对象
+### 闭包
+
+ECMAScript中，闭包指的是：
+
+1. 从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。
+2. 从实践角度：以下函数才算是闭包：
+   - 即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）
+
+   - 在代码中引用了自由变量
+
+闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量,利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。
+
+闭包的特性：
+
+1. 函数内再嵌套函数
+2. 内部函数可以引用外层的参数和变量
+3. 参数和变量不会被垃圾回收机制回收
+
+```javascript
+var data = [];
+
+for (var i = 0; i < 3; i++) {
+  data[i] = function () {
+    console.log(i);
+  };
+}
+
+data[0]();
+data[1]();
+data[2]();
+
+答案是都是 3，让我们分析一下原因：
+
+当执行到 data[0] 函数之前，此时全局上下文的 VO 为：
+
+globalContext = {
+    VO: {
+        data: [...],
+        i: 3
+    }
+}
+当执行 data[0] 函数的时候，data[0] 函数的作用域链为：
+
+data[0]Context = {
+    Scope: [AO, globalContext.VO]
+}
+data[0]Context 的 AO 并没有 i 值，所以会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3。
+
+data[1] 和 data[2] 是一样的道理。
+
+所以让我们改成闭包看看：
+
+var data = [];
+
+for (var i = 0; i < 3; i++) {
+  data[i] = (function (i) {
+        return function(){
+            console.log(i);
+        }
+  })(i);
+}
+
+data[0]();
+data[1]();
+data[2]();
+当执行到 data[0] 函数之前，此时全局上下文的 VO 为：
+
+globalContext = {
+    VO: {
+        data: [...],
+        i: 3
+    }
+}
+跟没改之前一模一样。
+
+当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：
+
+data[0]Context = {
+    Scope: [AO, 匿名函数Context.AO globalContext.VO]
+}
+匿名函数执行上下文的AO为：
+
+匿名函数Context = {
+    AO: {
+        arguments: {
+            0: 0,
+            length: 1
+        },
+        i: 0
+    }
+}
+data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，即使 globalContext.VO 也有 i 的值(值为3)，所以打印的结果就是0。
+```
+
+### Ajax(Asychronous Javascript and XML)
+
+Ajax 是一种异步请求数据的一种技术，主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，对于改善用户的体验和程序的性能很有帮助。
+
+```javascript
+(1)创建XMLHttpRequest对象,也就是创建一个异步调用对象
+(2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
+(3)设置响应HTTP请求状态变化的函数
+(4)发送HTTP请求
+(5)获取异步调用返回的数据
+(6)使用JavaScript和DOM实现局部刷新
+ 
+var xhr =null;//创建对象
+if(window.XMLHttpRequest){
+    xhr = new XMLHttpRequest();
+}else{
+    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xhr.open(“方式”,”地址”,”标志位”);//初始化请求
+xhr.setRequestHeader(“”,””);//设置http头信息
+xhr.onreadystatechange =function(){}//指定回调函数
+xhr.send();//发送请求
+
+readyState状态值一共有5种状态，从0 到 4 发生变化。
+0: 请求未初始化
+1: 服务器连接已建立
+2: 请求已接收
+3: 请求处理中
+4: 请求已完成，且响应已就绪
+
+xmlhttp.status：响应状态码。这个也是面试比较爱问的，这个必须知道4个以上，比较常见的有：
+200: "OK"
+403  （禁止） 		   服务器拒绝请求。
+404  （未找到） 		  服务器找不到请求的网页。
+408  （请求超时） 	  服务器等候请求时发生超时。
+500  （服务器内部错误）  服务器遇到错误，无法完成请求
+```
+
+Ajax 解决浏览器缓存问题？
+
+```
+1、在ajax发送请求前加上 anyAjaxObj.setRequestHeader("If-Modified-Since","0")。
+2、在ajax发送请求前加上 anyAjaxObj.setRequestHeader("Cache-Control","no-cache")。
+3、在URL后面加上一个随机数： "fresh=" + Math.random();。
+4、在URL后面加上时间戳："nowtime=" + new Date().getTime();。
+5、如果是使用jQuery，直接这样就可以了 $.ajaxSetup({cache:false})。这样页面的所有ajax都会执行这条语句就是不需要保存缓存记录。
+```
+
+### jQuery
+
+
+
+### 创建对象
 
 #### 使用new关键字调用构造器创建对象，`var p=new Person();`
 
@@ -410,6 +603,10 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 
 ![23](image/javascript/23.png)
 
+#### 原型
+
+每一个JavaScript对象（null除外）都和另一个对象相关联。另一个对象就是我们熟知的原型，每一个对象都从原型继承属性。比如通过new Array（）创建的对象的原型就是Array.prototype。
+
 ![25](image/javascript/25.png)
 
 现在就更像创建一般对象了。所有的非函数属性都在构造函数中创建，意味着又能够用构造函数的参数赋予属性默认值了。因为只创建 showColor() 函数的一个实例，所以没有内存浪费。此外，给 oCar1 的 drivers 数组添加 "Bill" 值，不会影响到 oCar2 的数组，所以输出这些数组的值时，oCar1.drivers 显示的是 "Mike,John,Bill"，而 oCar2.drivers 显示的是 "Mike,John"。因为使用了原型方式，所以仍然能利用 instanceof 运算符来判断对象的类型。
@@ -442,7 +639,7 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 
 ![33](image/javascript/33.png)
 
-### 8 w3school 学习笔记
+### w3school 学习笔记
 
 #### JavaScript：改变 HTML 图像
 
@@ -491,7 +688,7 @@ else
 
 ![14](image/javascript/14.png)
 
-### 9 JavaScript HTML DOM
+### JavaScript HTML DOM
 
 通过可编程的对象模型，JavaScript 获得了足够的能力来创建动态的 HTML。
 
@@ -513,6 +710,56 @@ else
 ![15](image/javascript/15.png)
 
 ![16](image/javascript/16.png)
+
+## 面试总结
+
+- JavaScript有几种类型的值？
+
+- ```
+  栈：原始数据类型（Undefined，Null，Boolean，Number、String）
+  堆：引用数据类型（对象、数组和函数）
+  
+  两种类型的区别是：存储位置不同；
+  原始数据类型直接存储在栈(stack)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；
+  引用数据类型存储在堆(heap)中的对象,占据空间大、大小不固定。如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体
+  ```
+
+  如何将浮点数点左边的数每三位添加一个逗号，如12000000.11转化为12,000,000.11?
+
+  ```javascript
+   function commafy(num){
+    	return num && num
+    		.toString()
+    		.replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2){
+    			return $2 + ',';
+    		});
+    }
+  ```
+
+- Javascript作用链域?
+
+  ```
+  全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。
+  ```
+
+- 如何解决跨域问题?
+
+```
+所谓同源是指，域名，协议，端口均相同，跨域则是其中一个或多个不同。
+http://www.123.com/index.html 调用 http://www.123.com/server.PHP （非跨域）
+http://www.123.com/index.html 调用 http://www.456.com/server.php （主域名不同:123/456，跨域）
+http://abc.123.com/index.html 调用 http://def.123.com/server.php （子域名不同:abc/def，跨域）
+http://www.123.com:8080/index.html 调用 http://www.123.com:8081/server.php （端口不同:8080/8081，跨域）
+http://www.123.com/index.html 调用 https://www.123.com/server.php （协议不同:http/https，跨域）
+  
+1、通过location.hash跨域
+2、通过window.name跨域
+3、通过window.postMessage跨域
+4、通过JSONP跨域
+5、通过WebSocket跨域
+6、通过CORS跨域
+```
+
 
 ## Reference
 
