@@ -32,6 +32,15 @@ html页面中出现 `<script>` 标签后，就会让页面暂停等待脚本的�
 
 变量定义：   var   自定义名称;
 
+### 声明变量 let
+
+关键字let有4种使用方式：
+
+- 可以作为变量声明，和var一样
+- 在for或for/in循环中，作为var的替代方案
+- 在语句中定义一个新变量并显示指定它的作用域
+- 定义一个在表达式内部作用域中的变量，这个变量只在表达式内可用。
+
 **命名规范：**
 
 - 变量名必须以字符或下划线“_”开头
@@ -599,6 +608,8 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 </html>
 ```
 
+#### 关键字this
+
 ![22](image/javascript/22.png)
 
 ![23](image/javascript/23.png)
@@ -617,7 +628,7 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 
 ![26](image/javascript/26.png)
 
-直到检查 typeof Car._initialized 是否等于 "undefined" 之前，这个构造函数都未发生变化。这行代码是动态原型方法中最重要的部分。如果这个值未定义，构造函数将用原型方式继续定义对象的方法，然后把 Car._initialized 设置为 true。如果这个值定义了（它的值为 true 时，typeof 的值为 Boolean），那么就不再创建该方法。简而言之，该方法使用标志（_initialized）来判断是否已给原型赋予了任何方法。该方法只创建并赋值一次，传统的 OOP 开发者会高兴地发现，这段代码看起来更像其他语言中的类定义了。
+直到检查 `typeof Car._initialized` 是否等于 "undefined" 之前，这个构造函数都未发生变化。这行代码是动态原型方法中最重要的部分。如果这个值未定义，构造函数将用原型方式继续定义对象的方法，然后把 `Car._initialized` 设置为 true。如果这个值定义了（它的值为 true 时，typeof 的值为 Boolean），那么就不再创建该方法。简而言之，该方法使用标志（_initialized）来判断是否已给原型赋予了任何方法。该方法只创建并赋值一次，传统的 OOP 开发者会高兴地发现，这段代码看起来更像其他语言中的类定义了。
 
 #### **重定义已有方法**
 
@@ -631,13 +642,25 @@ document.write(myFather.firstname + " is " + myFather.age + " years old.");
 
 ![29](image/javascript/29.png)
 
+#### call()和apply（）方法
+
 ![30](image/javascript/30.png)
 
 ![31](image/javascript/31.png)
 
+#### bind（）方法
+
+
+
+#### 原型链
+
 ![32](image/javascript/32.png)
 
 ![33](image/javascript/33.png)
+
+### 函数式编程
+
+
 
 ### w3school 学习笔记
 
