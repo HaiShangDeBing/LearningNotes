@@ -514,6 +514,481 @@ o.sayHi();
 
 # 数组
 
+JavaScript数组的索引是基于0的32位数值：第一个元素的索引为0，最大可能的索引为4294967294（$2^{32}$-2）。
 
+JavaScript数组是动态的：根据需要它们会增长或缩减，并且在创建数组时无须声明一个固定的大小或者数组大小变化时无须重新分配空间。
+
+JavaScript数组可能是稀疏的：数组元素的索引不一定要连续的，它们之间可以有空缺。每个JavaScript数组都有一个length属性，针对非稀疏数组，该属性就是数组元素的个数。针对稀疏数组，length比所有元素的索引要大。
+
+当设置length属性为一个小于当前长度的非负整数n时，当前数组中那些索引值大于或等于n的元素将从中删除。使用delete运算符来删除数组元素，并不会影响数组长度，也不会将元素从高索引处移下来填充已删除属性留下的空白。
+
+## 数组方法
+
+- concat()
+
+  ```javascript
+  //用于连接两个或多个数组，该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
+  var a = [1,2,3];
+  a.concat(4,5);				//[1,2,3,4,5]
+  a.concat([4,5]);			//[1,2,3,4,5]
+  a.concat([4,5],[6,7]);		//[1,2,3,4,5,6,7]
+  a.concat(4,[5,[6,7]]);		//[1,2,3,4,5,[6,7]]
+  ```
+
+- join()
+
+  ```javascript
+  //用于把数组中的所有元素放入一个字符串，元素是通过指定的分隔符进行分隔的。
+  var a = [1,2,3];
+  a.join();				//"1,2,3"
+  a.join(" ");			//"1 2 3"
+  a.join("");				//"123"
+  ```
+
+- pop()
+
+  ```javascript
+  //用于删除并返回数组原来的最后一个元素。
+  var a = [1,2,3];
+  a.pop();				//返回3，此时a = [1,2];
+  ```
+
+- push()
+
+  ```javascript
+  //向数组的末尾添加一个或多个元素，并返回新的长度。
+  var a = [1,2,3];
+  a.push(4);				//a = [1,2,3,4];
+  a.push(5,6);			//a = [1,2,3,4,5,6];
+  ```
+
+- reverse()
+
+  ```javascript
+  //用于颠倒数组中元素的顺序。
+  var a = [1,2,3];
+  a.reverse();				//a = [3,2,1];
+  ```
+
+- shift()
+
+  ```javascript
+  //用于把数组的第一个元素从其中删除，并返回原来的第一个元素的值。
+  var a = [1,2,3];
+  a.shift();				//返回1，此时a = [2，3];
+  ```
+
+- slice()
+
+  ```javascript
+  //slice(start,end)从已有的数组中返回选定的元素.
+  //start必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。
+  //end可选。规定从何处结束选取。如果没有指定该参数，那么切分的数组包含从 start 到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素。
+  var a = [1,2,3，4,5];
+  a.slice(0,3);				//[1,2,3];
+  a.slice(3);					//[4,5];
+  a.slice(1,-1);				//[2,3,4];
+  a.slice(-3,-2);				//[3];
+  ```
+
+- sort()
+
+  ```javascript
+  //用于对数组的元素进行排序。
+  //默认按照字符编码的顺序进行排序，如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。比较函数应该具有两个参数 a 和 b，其返回值如下：
+  //若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+  //若 a 等于 b，则返回 0。
+  //若 a 大于 b，则返回一个大于 0 的值。
+  var a = [10,5,40,25,1000,1];
+  a.sort();				//a = [1,10,1000,25,40,5];
+  a.sort(function(a,b){
+      return a-b;
+  });						//a = [1,5,10,25,40,1000]
+  
+  var b = ['ant','Bug','Dog','cat'];
+  b.sort();							//['Bug','Dog','ant','cat'];
+  b.sort(function(s,t){
+      var a = s.toLowerCase();
+      var b = t.toLowerCase();
+      if(a<b) return -1;
+      if(a>b) return 1;
+      return 0;
+  });									//['ant','Bug','cat','Dog']
+  ```
+
+- splice()
+
+  ```javascript
+  //splice(index,howmany,item1,.....,itemX)向数组中添加或从数组中删除项目，然后返回被删除的项目。
+  //index必需。整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置。
+  //howmany必需。要删除的项目数量。如果设置为0，则不会删除项目。
+  //item1, ..., itemX可选。向数组添加的新项目。
+  var a = [1,2,3,4,5,6,7,8];
+  a.splice(4);				//返回[5,6,7,8], a = [1,2,3,4];
+  a.splice(1,2);				//返回[2,3], a = [1,4]
+  a.splice(1,0,2,3);			//返回[], a = [1,2,3,4]
+  a.splice(1,2,[2,3],5);		//返回[2,3], a = [1,[2,3],5,4]
+  ```
+
+- toString()
+
+  ```javascript
+  //把数组转换为字符串，并返回结果。
+  var a = [1,2,3];
+  a.toString();				//"1,2,3"
+  ```
+
+- toLocaleString()
+
+  ```javascript
+  //把数组转换为本地字符串。
+  var a = [1,2,3];
+  a.toString();				//"1,2,3"
+  ```
+
+- unshift()
+
+  ```javascript
+  //向数组的开头添加一个或更多元素，并返回新数组的长度。
+  var a = [4,5];
+  a.unshift(3);				//返回3，此时a = [3,4,5];
+  a.unshift(1,2);				//返回5，此时a = [1,2,3,4,5];
+  ```
+
+- forEach()
+
+  ```javascript
+  //forEach(callback(currentValue, index, array){
+  //		do something
+  //}, this)
+  //从头至尾遍历数组，为每个元素调用指定的函数。三个参数分别为：数组当前元素，当前元素的索引（可选）和数组本身（可选）
+  var a = [1,2,3,4];
+  a.forEach(function(v,i,a){a[i]=v+1;});		//给每个数组元素的值加1
+  console.log(a);		//[2,3,4,5]
+  
+  var sum = 0;
+  a.forEach(function(item){sum += item;});	//求和
+  console.log(sum);	//14
+  
+  //如果数组在迭代时被修改了，则其他元素会被跳过。
+  a.forEach(function(item){
+      console.log(item);
+      if(item === 3){
+          a.shift();
+      }
+  });
+  //2
+  //3
+  //5
+  ```
+
+- map()
+
+  ```javascript
+  //map 方法会给原数组中的每个元素都按顺序调用一次callback 函数。callback 每次执行后的返回值（包括 undefined）组合起来形成一个新数组。不修改调用它的原数组本身
+  
+  var numbers = [1, 4, 9];
+  var roots = numbers.map(Math.sqrt);
+  // roots的值为[1, 2, 3], numbers的值仍为[1, 4, 9]
+  
+  var arr = ["1","2","3"];
+  console.log(arr.map(parseInt));		//[1,NaN,NaN]
+  console.log(arr.map( str => parseInt(str) ));	//[1,2,3]
+  console.log(arr.map(function(item){
+      return parseInt(item,10);
+  }));								//[1,2,3]	
+  ```
+
+- filter()
+
+  ```javascript
+  //filter() 方法给原数组中的每个元素都按顺序调用一次callback 函数 。保留callback每次执行后的返回值为true的元素。
+  var a = [5,4,3,2,1];
+  console.log(a.filter(function(x){return x<3;}));	//[2,1]
+  console.log(a.filter(function(x,i){return i%2==0;}));	//[5,3,1]
+  ```
+
+- every()
+
+  ```javascript
+  //every() 方法测试数组的所有元素是否都通过了指定函数的测试。
+  function isBelowThreshold(currentValue) {
+    return currentValue < 40;
+  }
+  var arr = [1, 30, 39, 29, 10, 13];
+  console.log(arr.every(isBelowThreshold));	//true
+  ```
+
+- some()
+
+  ```javascript
+  //some() 方法测试数组中的某些元素是否通过由提供的函数实现的测试。
+  var array = [1, 2, 3, 4, 5];
+  var even = function(element) {
+    // checks whether an element is even
+    return element % 2 === 0;
+  };
+  console.log(array.some(even));		//true
+  console.log(array.some(x => x>3));		//true
+  ```
+
+- reduce()和reduceRight()
+
+  ```javascript
+  //arr.reduce(callback[, initialValue])方法对累加器和数组中的每个元素（从左到右）应用一个函数，将其简化为单个值。
+  //initialValue用作第一个调用 callback的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。
+  //reduceRight的工作原理和reduce一样，不同的是它按照数组索引从右到左。
+  const array1 = [1, 2, 3, 4];
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  // 1 + 2 + 3 + 4
+  console.log(array1.reduce(reducer));
+  // expected output: 10
+  // 5 + 1 + 2 + 3 + 4
+  console.log(array1.reduce(reducer, 5));
+  // expected output: 15
+  
+  ```
+
+- indexOf()和lastIndexOf()
+
+  ```javascript
+  //indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。可以指定开始查找的位置
+  var array = [2, 5, 9];
+  array.indexOf(2);     	// 0
+  array.indexOf(7);     	// -1
+  array.indexOf(9, 2);  	// 2
+  array.indexOf(2, -1); 	// -1
+  array.indexOf(2, -3); 	// 0
+  //lastIndexOf() 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 fromIndex 处开始。
+  var array = [2, 5, 9, 2];
+  array.lastIndexOf(2);			//3
+  array.lastIndexOf(7);			//-1
+  array.lastIndexOf(2, 3);		//3
+  array.lastIndexOf(2, 2);		//0
+  array.lastIndexOf(2, -2);		//0
+  array.lastIndexOf(2, -1);		//3
+  ```
 
 # 函数
+
+## 函数表达式
+
+函数表达式和函数声明非常相似，它们甚至有相同的语法。一个函数表达式可能是一个更大的表达式的一部分。可以定义函数“名字”（例如可以在调用堆栈时使用）或者使用“匿名”函数。函数表达式不会提升，所以不能在定义之前调用。
+
+```javascript
+var myFunction = function name([param[, param[, ... param]]]) { statements }
+```
+
+- `name`
+
+  函数名，可以省略。当省略函数名的时候，该函数就成为了匿名函数。
+
+- `param`
+
+  传递给函数的参数的名称，一个函数最多可以有255个参数.
+
+- `statements`
+
+  组成函数体的声明语句。
+
+## 匿名函数
+
+```javascript
+function (parameter list)
+{
+  statements
+};
+```
+
+当函数只使用一次时，通常使用**IIFE (Immediately Invokable Function Expressions)。**
+
+```js
+(function() {
+    statements
+})();
+```
+
+**IIFE**是在函数声明后立即调用的函数表达式。
+
+## 生成器函数
+
+```javascript
+function* name([param[, param[, ... param]]]) { statements }
+```
+
+- `name`
+
+  函数名
+
+- `param`
+
+  要传递给函数的一个参数的名称，一个函数最多可以有255个参数。
+
+- `statements`
+
+  普通JS语句。
+
+生成器函数在执行时能暂停，后面又能从暂停处继续执行。
+
+调用一个生成器函数并不会马上执行它里面的语句，而是返回一个这个生成器的 迭代器 （iterator ）对象。当这个迭代器的 next() 方法被首次（后续）调用时，其内的语句会执行到第一个（后续）出现yield的位置为止，yield 后紧跟迭代器要返回的值。或者如果用的是 yield*（多了个星号），则表示将执行权移交给另一个生成器函数（当前生成器暂停执行）。
+
+next()方法返回一个对象，这个对象包含两个属性：value 和 done，value 属性表示本次 yield 表达式的返回值，done 属性为布尔类型，表示生成器后续是否还有 yield 语句，即生成器函数是否已经执行完毕并返回。
+
+调用 next()方法时，如果传入了参数，那么这个参数会作为上一条执行的  yield 语句的返回值，例如：
+
+```javascript
+function *gen(){
+    yield 10;
+    y=yield 'foo';
+    yield y;
+}
+
+var gen_obj=gen();
+console.log(gen_obj.next());// 执行 yield 10，返回 10
+console.log(gen_obj.next());// 执行 yield 'foo'，返回 'foo'
+console.log(gen_obj.next(10));// 将 10 赋给上一条 yield 'foo' 的左值，即执行 y=10，返回 10
+console.log(gen_obj.next());// 执行完毕，value 为 undefined，done 为 true
+
+
+function* anotherGenerator(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function* generator(i){
+  yield i;
+  yield* anotherGenerator(i);// 移交执行权
+  yield i + 10;
+}
+
+var gen = generator(10);
+
+console.log(gen.next().value); // 10
+console.log(gen.next().value); // 11
+console.log(gen.next().value); // 12
+console.log(gen.next().value); // 13
+console.log(gen.next().value); // 20
+```
+
+## 箭头函数
+
+```
+([param] [, param]) => { statements } param => expression
+```
+
+- `param`
+
+  参数名称. 零参数需要用()表示.  只有一个参数时不需要括号. (例如 `foo => 1`)
+
+- `statements or expression`
+
+  多个声明statements需要用大括号括起来，而单个表达式时则不需要。表达式expression也是该函数的隐式返回值。
+
+箭头函数表达式具有比函数表达式更短的语法，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。
+
+```js
+var func = x => x * x;                  
+var func = (x, y) => { return x + y; }; 
+var func = () => ({foo: 1});
+
+var simple = a => a > 15 ? 15 : a; 
+simple(16); // 15
+simple(10); // 10
+```
+
+## 函数调用
+
+- 作为函数调用
+- 作为方法调用
+- 作为构造函数调用
+- 通过apply和call方法调用
+
+## 闭包
+
+函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性称为闭包。从技术的角度讲，所有的JavaScript函数都是闭包，它们都是对象，它们都关联到作用域链。闭包可以让函数访问到在函数声明时处于作用域中的所有变量及其函数。
+
+```js
+function makeFunc() {
+    var name = "Mozilla";
+    function displayName() {
+        console.log(name);
+    }
+    return displayName;
+}
+
+var myFunc = makeFunc();
+myFunc();					//Mozilla
+
+
+function makeAdder(x) {
+  return function(y) {
+    return x + y;
+  };
+}
+
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
+
+console.log(add5(2));  		// 7
+console.log(add10(2)); 		// 12
+```
+
+```javascript
+//用闭包模拟私有方法
+var Counter = (function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
+  }
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  }   
+})();
+
+console.log(Counter.value()); /* logs 0 */
+Counter.increment();
+Counter.increment();
+console.log(Counter.value()); /* logs 2 */
+Counter.decrement();
+console.log(Counter.value()); /* logs 1 */
+
+//每次调用其中一个计数器时，通过改变这个变量的值，会改变这个闭包的词法环境。然而在一个闭包内对变量的修改，不会影响到另外一个闭包中的变量。
+var makeCounter = function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
+  }
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  }  
+};
+
+var Counter1 = makeCounter();
+var Counter2 = makeCounter();
+console.log(Counter1.value()); /* logs 0 */
+Counter1.increment();
+Counter1.increment();
+console.log(Counter1.value()); /* logs 2 */
+Counter1.decrement();
+console.log(Counter1.value()); /* logs 1 */
+console.log(Counter2.value()); /* logs 0 */
+```
+
+## 函数式编程
