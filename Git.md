@@ -46,6 +46,12 @@ ssh-keygen -t rsa -C "youremail@example.com"
 git remote add origin git@github.com:GitAccountName/test.git
 ```
 
+如果提示remote orgin already exists，则：
+
+```bash
+git remote rm origin
+```
+
 下一步，就可以把本地库的所有内容推送到远程库上，后面继续提交只需要这个命令：
 
 ```bash
@@ -76,7 +82,7 @@ git clone git@github.com:GitAccountName/test.git
 
 ## 其它命令
 
-检查状态
+检查状态：
 
 ```bash
 git status
@@ -88,15 +94,13 @@ git status
 git diff
 ```
 
-自动将在提交前将已记录、修改的文件放入缓存区
+自动将在提交前将已记录、修改的文件放入缓存区，然后会出现 vim 界面，按 i 插入，输入本次提交的说明；按 Esc 返回命令模式，输入 :wq 保存退出。
 
 ```bash
 git commit -a
 ```
 
-然后会出现 vim 界面，按 i 插入，输入本次提交的说明；按 Esc 返回命令模式，输入 :wq 保存退出。
-
-查看配置
+查看相关配置
 
 ```bash
 git config --list
