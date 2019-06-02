@@ -78,20 +78,28 @@ git clone git@github.com:GitAccountName/test.git
 
 检查状态
 
-```
+```bash
 git status
 ```
 
 尚未缓存的改动
 
-```
+```bash
 git diff
 ```
 
 自动将在提交前将已记录、修改的文件放入缓存区
 
-```
+```bash
 git commit -a
 ```
 
 然后会出现 vim 界面，按 i 插入，输入本次提交的说明；按 Esc 返回命令模式，输入 :wq 保存退出。
+
+查看配置
+
+```bash
+git config --list
+git config user.name
+```
+
